@@ -1,0 +1,55 @@
+body{
+			font-size: 18px;
+		}
+
+		section{
+			width: 100vw;
+		height: 100vh;
+		}
+
+		h1{
+			margin-top: 51px;
+		}
+
+		.cl_white{
+			color: white;
+		}
+
+		#logo{
+			margin-top: 50px;
+		}
+		.explore{
+
+			width: 375px;
+			height: 350px;
+		}
+		.explore:hover{
+			opacity: .5;
+			transition: opacity .5s ease-in-out;
+		}
+		#footer{
+			color: white;
+			height: 50px;
+			font-size: 15px;
+			width: 100%;
+			background-color: #0d0d0d;
+			text-align: center;
+		}
+		#middle{
+			height: 480px;
+		}
+		#contact{
+			background-color: #262626;
+			margin-top: 130px;
+			height: 700px;
+		}
+		td{
+			padding: 3px; 
+		}
+		th{
+			float: left;
+		}
+		.error{
+			color: red;
+			float: right;
+		}

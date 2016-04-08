@@ -1,0 +1,13 @@
+Student (StudentID, FirstName, LastName, Email, Password, Gender)
+
+Teacher (TeacherID, FirstName, LastName, Email, Password, Gender)
+
+Course (CourseID, CourseTitle, CourseLevel, TeacherID)
+
+StudentCourse (StudentID, CourseID, LessonCompleted, Score)
+
+Lesson (LessonID,LessonTitle, LessonLink, CourseID)
+
+Quiz (QuizID, Question, LessonID)
+
+QuizAnswer (QuizAnswerID, Option, Boolean, QuizID)

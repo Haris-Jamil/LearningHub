@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Learning Hub</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<style type="text/css">
+		body{
+			font-size: 18px;
+		}
+
+		section{
+			width: 100vw;
+		height: 100vh;
+		}
+
+		h1{
+			margin-top: 51px;
+		}
+
+		.cl_white{
+			color: white;
+		}
+
+		#logo{
+			margin-top: 50px;
+		}
+		.explore{
+
+			width: 375px;
+			height: 350px;
+		}
+		.explore:hover{
+			opacity: .5;
+			transition: opacity .5s ease-in-out;
+		}
+		#footer{
+			color: white;
+			height: 50px;
+			font-size: 15px;
+			width: 100%;
+			background-color: #0d0d0d;
+			text-align: center;
+		}
+		#middle{
+			height: 480px;
+		}
+		#contact{
+			background-color: #262626;
+			margin-top: 130px;
+			height: 700px;
+		}
+		td{
+			padding: 3px; 
+		}
+		th{
+			float: left;
+		}
+		.error{
+			color: red;
+		}
+		</style>
+	</head>
+	<body data-spy="scroll" data-target=".navbar">
+		<nav class="navbar navbar-inverse	 navbar-fixed-top"> 
+			<ul class="nav navbar-nav">
+				<li><a href="#home">Home</a></li>
+				<li><a href="#middle">Explore</a></li>
+				<li><a href="#contact">Contact</a></li>
+				<li><a href="#profile">Profile</a></li>
+			</ul>
+		</nav>
+
+		<section id="home" style="background: url(images/space.jpg); background-size: 100% 100%" class="cl_white text-center ">
+			<img src="images/logo2.png" id="logo">
+			<br><br><br>
+			<div class="col-md-4 col-md-offset-4" >
+				<h2>Learn Amazing Courses now!</h2>
+				<h3>Sign in</h3>
+			 	<button type="button"class="btn btn-info btn-lg" data-toggle="modal" data-target="#signin_teac">As a Teacher</button>
+				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#signin_stu">As a Student</button>
+				<br><br>
+				<p >Don't have any acount?  <a href="#" style="color: white;" data-toggle="modal" data-target="#signup">sign up!</a></p>
+			</div>
+		</section>
+
+		<!---MODAL SINGIN_TEACHER-->
+		<div id="signin_teac" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title" align="center">Sign in</h3>
+					</div>
+					<div class="modal-body">
+						 <form>
+						 	<table align="center"	>
+						 		<tr>
+						 			<th>User Name:</th>
+						 			<td><input type="text" class="form-control"></input></td>
+						 		</tr>
+				
+						 		<tr>
+						 			<th>Password:</th>
+						 			<td><input type="password" class="form-control"></input></td>
+						 		</tr>
+						 		<tr>
+						 			<td></td>
+						 			<td align="right"><input type="submit" class="btn btn-success"></input></td>
+						 		</tr>
+						 	</table>
+						 </form>
+					</div>
+					<div class="modal-footer">
+						 <button class="btn btn-default" data-dismiss="modal">close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!---MODAL SINGIN_Student-->
+		<div id="signin_stu" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title" align="center">Sign in</h3>
+					</div>
+					<div class="modal-body">
+						 <form>
+						 	<table align="center"	>
+						 		<tr>
+						 			<th>User Name:</th>
+						 			<td><input type="text" class="form-control"></input></td>
+						 		</tr>
+				
+						 		<tr>
+						 			<th>Password:</th>
+						 			<td><input type="password" class="form-control"></input></td>
+						 		</tr>
+						 		<tr>
+						 			<td></td>
+						 			<td align="right"><input type="submit" class="btn btn-success"></input></td>
+						 		</tr>
+						 	</table>
+						 </form>
+					</div>
+					<div class="modal-footer">
+						 <button class="btn btn-default" data-dismiss="modal">close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!---MODAL SINGUP-->
+		<div id="signup" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title" align="center">Sign up</h3>
+					</div>
+					<div class="modal-body">
+						 <form method="post" action="test.php">
+						 	<table align="center">
+						 		<tr>
+						 			<th>User Name: </th>
+						 			<td><input type="text" class="form-control" name="username"></td>
+						 		</tr>
+								<tr>
+						 			<th>Email: </th>
+						 			<td><input type="email" class="form-control" name="email"></input></td>
+						 		</tr>
+						 		<tr>
+						 			<th>Password: </th>
+						 			<td><input type="password" class="form-control" name="password"></input></td>
+						 		</tr>
+						 		<tr>
+						 			<th>Account: </th>
+						 			<td><input type="radio"  name="status" value="teacher"> Teacher</input>
+						 				<input type="radio"  name="status" value="student"> Stundent</input>
+						 			</td>
+						 		</tr>
+						 		<tr>
+						 			<td></td>
+						 			<td align="right"><input type="submit" class="btn btn-success"></input></td>
+						 		</tr>
+						 	</table>
+						 </form>
+					</div>
+					<div class="modal-footer">
+						 <button class="btn btn-default" data-dismiss="modal">close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<section class="container-fluid" align="center" id="middle">
+			<div class="page-header">
+				<h1 class="text-center">Courses</h1>
+			</div>	
+			<div>
+				<img src="images/business.jpg" class="img-thumbnail explore" >
+				<img src="images/creative.jpg" class="img-thumbnail explore" >
+				<img src="images/technology.jpg" class="img-thumbnail explore" >	
+			</div>
+			<div>
+				<h2 class="col-md-4 text-center" >business</h2>
+				<h2 class="col-md-4 text-center" >Creative</h2>
+				<h2 class="col-md-4 text-center" >Technology</h2>
+			</div>
+			<div align="center">
+				<button class="btn btn-info btn-lg" >Explore!</button>
+			</div>
+		</section>
+
+		<section class="container-fluid" id="contact">
+			<div class="page-header" >
+				<h1 class="text-center" style="color: white;">Contact Us</h1>
+			</div>
+			<form class="col-md-4 col-md-offset-4">
+				<div class="fomr-group">
+					<input class="form-control" type="text" placeholder="name" style="margin-bottom: 10px;">
+				</div>
+				<div class="fomr-group">
+					<input class="form-control " type="email" placeholder="email" style="margin-bottom: 10px;">
+				</div>
+				<div class="fomr-group">
+					<input class="form-control" type="text" placeholder="subject" style="margin-bottom: 10px;">
+				</div>
+				<div class="fomr-group">
+					<textarea class="form-control" rows="7" style="margin-bottom: 10px;" placeholder="comments.."></textarea> 
+				</div>
+				<div class="fomr-group">
+					<input type="submit" class="btn btn-success btn-block"></input> 
+				</div>
+			</form>
+			<div class="col-md-4 col-md-offset-4">
+				<img src="images/logo2.png" id="logo">	
+			</div>
+		</section>	
+	
+		<div id="footer" >
+			<br>
+			<p style="align:center;">&copy; 2016 Learninghub.com all rights reserved</p>
+		</div>		
+		
+	</body>
+
+	<?php
+		$username,$email,$password,$status="";
+		$usernameErr,$emailErr,$passwordErr,$statusErr="";
+
+		if($_SERVER["REQUEST_METHOD"]=="POST"){
+			if(empty($POST["username"])){
+				$usernameErr = "username is required";
+			}
+			else{
+				$username = test_input($_POST["username"]);
+			}
+
+			if(empty($POST["email"])){
+				$emailErr = "email is required";
+			}
+			else{
+				$email = test_input($_POST["email"]);
+			}
+
+			if(empty($POST["password"])){
+				$passwordErr = "password is required";
+			}
+			else{
+				$password = test_input($_POST["password"]);
+			}
+
+			if(empty($POST["status"])){
+				$statusErr = "please select your acount type";
+			}
+			else{
+				$status = test_input($_POST["status"]);
+			}
+		}
+
+
+		function test_input($data){
+			$data = trim($data);
+			$data = stripslashes($data);
+			$data = htmlspecialchars($data);
+			return $data;
+		}
+	?>
+</html>
