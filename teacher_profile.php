@@ -9,6 +9,7 @@
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	session_start();
 	$user = $_SESSION["CurUser"];
+	$userId = $_SESSION['CurUserId'];
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +21,26 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
+
+	<?php
+		$servername = "localhost";
+		$username = "root";
+		$password = "helloworld";
+		$db = "project";
+
+		$conn = mysqli_connect($servername,$username,$password,$db);
+
+		if(!$conn){
+			die("connection Failed:" . mysqli_connect_error());
+		}
+		else{
+			//echo "connection built successfully" . "<br>";
+		}
+
+		$sql1 = "SELECT course_title,course_level FROM course WHERE teacher_id='$userId'";
+		$result = mysqli_query($conn,$sql1);
+
+	?>
 
 	<?php 
 		$link = $_GET['link'];
@@ -76,33 +97,33 @@
 		</div>
 		
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#CoursePro" data-toggle="tab">Your Courses</a></li>
+			<li class="active"><a href="#your_courses" data-toggle="tab">Your Courses</a></li>
 			<li><a href="#CourseCom" data-toggle="tab">Students</a></li>
 			<li><a href="#QuizPro" data-toggle="tab">Quizes</a></li>
 		</ul>
 		<br>
 		<div class="tab-content">
-			<div id="CoursePro" class="tab-pane fade in active">
+
+			<div id="your_courses" class="tab-pane fade in active">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Your courses
 					</div>
 					<div class="panel-body">
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
+						<table class="table table-hover" >
+							<tr class="info">
+								<th>Course title</th>
+								<th >Course level</th>
+							</tr>
+							 <?php 
+								while($row = mysqli_fetch_assoc($result)){
+									echo "<tr>
+											<td>{$row['course_title']}</td>
+											<td>{$row['course_level']}</td>
+											</tr>";
+								}
+							?> 
+						</table>
 					</div>
 	 			</div>
 			</div>
@@ -113,11 +134,24 @@
 						Your students
 					</div>
 					<div class="panel-body">
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
-						<p>Sample text</p>
+						<table class="table table-hover">
+							<tr class="info">
+								<th>hello</th>
+								<th>world</th>
+							</tr>
+							<tr>
+								<td>hello</td>
+								<td>world</td>
+							</tr>
+							<tr>
+								<td>hello</td>
+								<td>world</td>
+							</tr>
+							<tr>
+								<td>hello</td>
+								<td>world</td>
+							</tr>
+						</table>
 					</div>
 	 			</div>
 			</div>
@@ -128,7 +162,24 @@
 						Quiz Scores
 					</div>
 					<div class="panel-body">
-	
+							<table class="table table-hover">
+							<tr class="info">
+								<th>boom</th>
+								<th>boom</th>
+							</tr>
+							<tr>
+								<td>boom</td>
+								<td>boom</td>
+							</tr>
+							<tr>
+								<td>boom</td>
+								<td>boom</td>
+							</tr>
+							<tr>
+								<td>boom</td>
+								<td>boom</td>
+							</tr>
+						</table>
 					</div>
 	 			</div>	
 		</section>	
@@ -140,4 +191,8 @@
 	</div>
 
 </body>
+
+	<?php
+		mysqli_close($conn);	
+	?>
 </html>

@@ -22,9 +22,10 @@
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 
 	<?php
-		$courseTitle = $courseLevel = $NoVideos = "";
-		$display = 'none';
-		$nextBtn = ''; 
+		$courseTitle = $courseLevel ="";
+		$lesson_title = $lesson_link = "";
+		$_SESSION['NoVideos'] = $_SESSION['LastCourseId'] = ""; 
+
 		function test_input($data){
 			$data = trim($data);
 			$data = stripslashes($data);
@@ -46,14 +47,13 @@
 		else{
 			//echo "connection built successfully" . "<br>";
 		}
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		///////////////////////////////////////VALIDATE SIGNIN//////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////COURSE/////////////////////////////////////////////////////////////////
 		if(isset($_POST['course_btn'])){
 			if($_SERVER['REQUEST_METHOD'] == "POST"){
 				$course_title = test_input($_POST["course_title"]);
 				$course_level = test_input($_POST["course_level"]);
-				$NoVideos = test_input($_POST["no_videos"]);
+				$_SESSION['NoVideos'] = test_input($_POST["no_videos"]);
 			}
 			$getTeacherId = "SELECT teacher_id FROM teacher WHERE username='$user'";
 			$result = mysqli_query($conn,$getTeacherId);
@@ -62,13 +62,15 @@
 			$sql = "INSERT into course (course_title,course_level,teacher_id) VALUES ('$course_title','$course_level','$teacherId[teacher_id]')";
 
 			if(mysqli_query($conn,$sql)){	
-				$display = 'block';
-				$nextBtn = 'disabled';
+				$_SESSION['lastCourseId'] = mysqli_insert_id($conn);
+				redirectTo("upload_lesson.php");
 			}
 			else{
 				echo "error : " . mysqli_error($conn);
 			}
 		}
+
+
 	?>
 
 	<?php
@@ -138,32 +140,15 @@
 				</tr>
 				<tr>
 					<td></td>
-				   <td align="right"><input type="submit" class="btn btn-success" name="course_btn" value="next" <?php echo $nextBtn; ?> ></input>
+				   <td align="right"><input type="submit" class="btn btn-success" name="course_btn" value="next" ></input>
 				   </td>
 				</tr>
 			</table>
 		</form>
 	</div>
-
-	<div class="text-center" id="lesson_form" style="display: <?php echo $display;?>;">	 
-		<h3>Lesson detail</h3>
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-			<table align="center">
-				<tr>
-					<th>Lesson title:</th>
-					<td><input class="form-control" name="course_title" type="text" required></input></td>
-				</tr>
-				<tr>
-					<th>Lesson link:</th>
-					<td><input type="text" class="form-control" name="course_level" required></input></td>
-				</tr>
-				<tr>
-					<td></td>
-				   <td align="right"><input type="submit" class="btn btn-success " name="course_btn" value="next" required></input></td>
-				</tr>
-			</table>
-		</form>
+	<div id="footer">
+		<br>
+		<p style="align:center;">&copy; 2016 Learninghub.com all rights reserved</p>
 	</div>
-
 </body>
 </html>

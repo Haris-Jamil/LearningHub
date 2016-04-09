@@ -66,6 +66,14 @@
 			$checkUsernameSIAvail = mysqli_query($conn,"SELECT username FROM " . $statusSI . " WHERE username='$usernameSI'");
 			$checkPassword = mysqli_query($conn,"SELECT password FROM " .$statusSI. " WHERE username='$usernameSI'");
 
+			if($statusSI == 'stundets'){
+				$CurUserId = "SELECT student_id FROM students WHERE username='$usernameSI'";
+			}
+			else{
+				$CurUserId = "SELECT teacher_id FROM teacher WHERE username='$usernameSI'";
+			}
+			
+
 			$pass = mysqli_fetch_assoc($checkPassword);
 
 			if( (mysqli_num_rows($checkUsernameSIAvail) != 1) || ($pass['password'] != $passwordSI) ){
@@ -73,6 +81,19 @@
 			}
 			else{
 				$_SESSION["CurUser"] = $usernameSI;
+				
+				$result = mysqli_query($conn,$CurUserId);
+				$userId = mysqli_fetch_assoc($result);
+
+				
+				if($status == "student"){
+					$_SESSION['CurUserId'] = $userId['student_id'];
+				}
+				else{
+					$_SESSION['CurUserId'] = $userId['teacher_id'];
+				}
+					
+
 				if($statusSI == "students"){
 					redirectTo('profile.php');	
 				}
@@ -84,7 +105,7 @@
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		///////////////////////////////////////VALIDATE SIGNUP//////////////////////////////////////////////////////////////
+		///////////////////////////////////VALIDATESIGNUP//////////////////////////////////////////////////////////////
 		if(isset($_POST['signup'])){
 
 			if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -95,14 +116,16 @@
 			}
 
 			if($status == "student"){
-				$checkUsernameAvail = mysqli_query($conn,"SELECT username FROM students WHERE username='$appusername'");	
+			    $checkUsernameAvail = mysqli_query($conn,"SELECT username FROM students WHERE username='$appusername'");	
 				$checkEmailAvail = mysqli_query($conn,"SELECT email FROM students WHERE email='$email'");
+				$CurUserId = "SELECT student_id FROM students WHERE username='$appusername'";
 				$sql = "INSERT INTO students (username,email,password) VALUES ('$appusername','$email','$password')";
 				$goto = "profile.php";
 			}
 			else{
 				$checkUsernameAvail = mysqli_query($conn,"SELECT username FROM teacher WHERE username='$appusername'");
 				$checkEmailAvail = mysqli_query($conn,"SELECT email FROM teacher WHERE email='$email'");	
+				$CurUserId = "SELECT teacher_id FROM teacher WHERE username='$appusername'";
 				$sql = "INSERT INTO teacher (username,email,password) VALUES ('$appusername','$email','$password')";
 				$goto = "teacher_profile.php";
 			}
@@ -116,10 +139,19 @@
 				$emailErr = "Email already in use";
 				$saveData=1;
 			}
-			if($saveData == 0){
-				
+			if($saveData == 0){	
 				if(mysqli_query($conn,$sql)){
+					$result = mysqli_query($conn,$CurUserId);
+					$userId = mysqli_fetch_assoc($result);
+
 					$_SESSION['CurUser'] = $appusername;
+					if($status == "student"){
+						$_SESSION['CurUserId'] = $userId['student_id'];
+					}
+					else{
+						$_SESSION['CurUserId'] = $userId['teacher_id'];
+					}
+					
 					redirectTo($goto);
 				}
 				else{
